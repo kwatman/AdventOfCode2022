@@ -4,17 +4,15 @@ public class Shape
 {
     public static List<Shape> Shapes;
     public string Name { get; set; }
-    public string OpponentAlias { get; set; }
     public string Alias { get; set; }
     public int Score { get; set; }
     
     public Shape Weakness { get; set; }
 
-    public Shape(string name,int score,string opponentAlias,string alias)
+    public Shape(string name,int score,string alias)
     {
         Name = name;
         Score = score;
-        OpponentAlias = opponentAlias;
         Alias = alias;
         Shapes.Add(this);
     }
@@ -23,7 +21,26 @@ public class Shape
     {
         foreach (Shape shape in Shapes)
         {
-            if (shape.Alias == shapeAlias || shape.OpponentAlias == shapeAlias)
+            if (shape.Alias == shapeAlias)
+            {
+                return shape;
+            }
+        }
+        return null;
+    }
+    public static Shape GetCorrectShape(Shape oppenentShape, string winCondition)
+    {
+        foreach (Shape shape in Shapes)
+        {
+            if (shape.Weakness == oppenentShape && winCondition == "X")
+            {
+                return shape;
+            }
+            if (shape == oppenentShape && winCondition == "Y")
+            {
+                return shape;
+            }
+            if (oppenentShape.Weakness == shape && winCondition == "Z")
             {
                 return shape;
             }
