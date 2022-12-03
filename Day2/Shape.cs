@@ -1,12 +1,10 @@
 ﻿namespace Day2;
-
 public class Shape
 {
     public static List<Shape> Shapes;
     public string Name { get; set; }
     public string Alias { get; set; }
     public int Score { get; set; }
-    
     public Shape Weakness { get; set; }
 
     public Shape(string name,int score,string alias)
