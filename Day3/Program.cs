@@ -6,18 +6,10 @@ namespace Day3 // Note: actual namespace depends on the project name.
     {
         static void Main(string[] args)
         {
-            int maxPrios = File.ReadAllLines("./input.txt").Select(l =>
-                {
-                    string first = l.Substring(0,l.Length/2);
-                    string last = l.Substring(l.Length/2,l.Length/2);
-                    string[] parts = { first, last };
-                    return parts;
-                }).Select(a =>
-                {
-                   char item = a[0].ToCharArray().ToList().Where(c => a[1].Contains(c)).ToList()[0];
-                   int prior = (char.ToUpper(item) - 64)+ (Char.IsUpper(item) ?  26 :  0);
-                   return prior;
-                }).Sum();
+            int maxPrios = File.ReadAllLines("./input.txt")
+                .Select(l => new string[] {l.Substring(0,l.Length/2),l.Substring(l.Length/2,l.Length/2)})
+                .Select(a => (char.ToUpper(a[0].ToCharArray().ToList().Where(c => a[1].Contains(c)).ToList()[0]) - 64)+ (Char.IsUpper(a[0].ToCharArray().ToList().Where(c => a[1].Contains(c)).ToList()[0]) ?  26 :  0)).
+                Sum();
             Console.WriteLine("result: " + maxPrios);
         }
     }
