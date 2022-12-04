@@ -11,9 +11,20 @@ namespace Day4 // Note: actual namespace depends on the project name.
                 .Select(s => new int[][] {s[0].Split("-").Select(i => Int32.Parse(i)).ToArray(),s[1].Split("-").Select(i => Int32.Parse(i)).ToArray()})
                 .Select(i => ((i[0][0] <= i[1][0] && i[0][1] >= i[1][1]) || (i[1][0] <= i[0][0] && i[1][1] >= i[0][1])) ? 1 : 0)
                 .Sum();
+            
+            int overlaps =  File.ReadAllLines("./input.txt")
+                .Select(l => l.Split(","))
+                .Select(s => new int[][] {s[0].Split("-").Select(i => Int32.Parse(i)).ToArray(),s[1].Split("-").Select(i => Int32.Parse(i)).ToArray()})
+                .Select(i => (
+                    (i[0][0] <= i[1][0] && i[0][1] >= i[1][1]) || (i[1][0] <= i[0][0] && i[1][1] >= i[0][1]) || //total overlap
+                    (i[0][0] <= i[1][0] && i[0][1] >= i[1][0]) || (i[1][0] <= i[0][0] && i[1][1] >= i[0][0]) || //overlap left
+                    (i[0][0] <= i[1][1] && i[0][1] >= i[1][1]) || (i[1][0] <= i[0][1] && i[1][1] >= i[0][1]) //overlap right
+                ) ? 1 : 0)
+                .Sum();
 
-            Console.WriteLine("The total number of overlaps is: " + totalOverlaps);
-                
+            Console.WriteLine("The total number of total overlaps is: " + totalOverlaps);
+            Console.WriteLine("The total number of overlaps is: " + overlaps);
+ 
         }
     }
 }
