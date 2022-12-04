@@ -19,7 +19,6 @@ namespace Day3 // Note: actual namespace depends on the project name.
                               (Char.IsUpper(a.ToList()[0].ToCharArray().ToList().Where(c => a.ToList()[1].Contains(c) && a.ToList()[2].Contains(c)).ToList()[0]) ?  26 :  0))
                 .Sum();
             Console.WriteLine("sum of all priorities part2: " + maxPrios2);
-            
         }
     }
 }
